@@ -3,23 +3,34 @@ import userEvent from '@testing-library/user-event'
 
 import Counter from './index'
 
-// it('increase btn') veya
-test('increase btn', () => {
-  // component i render et
-  render(<Counter />)
-  // test etmek istediğim şeyi al - burada buton
-  const increaseBtn = screen.getByText('Increase')
-  // count u al -varsayılan '0' olduğu için ->
-  const count = screen.getByText('0')
-  // butona tıklat
-  userEvent.click(increaseBtn)
-  expect(count).toHaveTextContent('1')
-})
+describe('Counter Tests', () => {
+  let increaseBtn, decreaseBtn, count
+  //herbiri çalışmadan önce yapılacaklar
+  beforeEach(() => {
+    // component i render et
+    render(<Counter />)
+    // test etmek istediğim şeyi al - burada buton
+    increaseBtn = screen.getByText('Increase')
+    decreaseBtn = screen.getByText('Decrease')
+    // count u al -varsayılan '0' olduğu için ->
+    count = screen.getByText('0')
+  })
 
-test('decrease btn', () => {
-  render(<Counter />)
-  const decreaseBtn = screen.getByText('Decrease')
-  const count = screen.getByText('0')
-  userEvent.click(decreaseBtn)
-  expect(count).toHaveTextContent('-1')
+  // tüm testlerden önce bir kez çalışır
+  // beforeAll
+
+  // afterAll
+
+  // afterEach
+
+  test('increase btn', () => {
+    // butona tıklat
+    userEvent.click(increaseBtn)
+    expect(count).toHaveTextContent('1')
+  })
+
+  test('decrease btn', () => {
+    userEvent.click(decreaseBtn)
+    expect(count).toHaveTextContent('-1')
+  })
 })
